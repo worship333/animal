@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://code.alibabatech.com/schema/dubbo 
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- 给当前Provider自定义个名字 -->
+	<dubbo:application name="dubbo-animal-service"/>
+	<!-- 配置注册中心  -->
+	<dubbo:registry address="192.168.141.137:2181"  protocol="zookeeper"></dubbo:registry>
+	<!-- 配置端口 -->
+	<dubbo:protocol name="dubbo" port="20888"  ></dubbo:protocol>
+	<!-- 注册功能 -->
+	<dubbo:service interface="com.animal.dubbo.service.DwItemDubboService" ref="dwItemDubboServiceImpl"></dubbo:service>
+	<bean id="dwItemDubboServiceImpl" class="com.animal.dubbo.service.impl.DwItemDubboServiceImpl"></bean>
+	<!-- 动物类目服务 -->
+	<dubbo:service interface="com.animal.dubbo.service.DwItemCatDubboService" ref="dwItemCatDubboServiceImpl"></dubbo:service>
+	<bean id="dwItemCatDubboServiceImpl" class="com.animal.dubbo.service.impl.DwItemCatDubboServiceImpl"></bean>
+	
+	<!-- 动物描述服务 -->
+	<dubbo:service interface="com.animal.dubbo.service.DwItemDescDubboService" ref="dwItemDescDubboServiceImpl"></dubbo:service>
+	<bean id="dwItemDescDubboServiceImpl" class="com.animal.dubbo.service.impl.DwItemDescDubboServiceImpl"></bean>
+	
+	<!-- 内容分类服务 -->
+	<dubbo:service interface="com.animal.dubbo.service.DwContentCategoryDubboService" ref="dwContentCategoryDubboServiceImpl"></dubbo:service>
+	<bean id="dwContentCategoryDubboServiceImpl" class="com.animal.dubbo.service.impl.DwContentCategoryDubboServiceImpl"></bean>
+	
+	<!-- 内容 -->
+	<dubbo:service interface="com.animal.dubbo.service.DwContentDubboService" ref="dwContentDubboServiceImpl"></dubbo:service>
+	<bean id="dwContentDubboServiceImpl" class="com.animal.dubbo.service.impl.DwContentDubboServiceImpl"></bean>
+	
+	<!-- 用户 -->
+	<dubbo:service interface="com.animal.dubbo.service.DwUserDubboService" ref="dwUserDubboServiceImpl"></dubbo:service>
+	<bean id="dwUserDubboServiceImpl" class="com.animal.dubbo.service.impl.DwUserDubboServiceImpl"></bean>
+	
+	
+	<import resource="../../applicationContext.xml"/>
+</beans>
+
